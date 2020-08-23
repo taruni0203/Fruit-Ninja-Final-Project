@@ -50,7 +50,7 @@ function setup() {
   BoomGroup = createGroup();
   NinjaGroup = createGroup();
 
-  ninja = createSprite(width/2,height-80,0.05,0.05);
+  ninja = createSprite(width/2,height-30,0.05,0.05);
  
   yesButton = createButton("Yes");
   yesButton.position(width/2,height*3/4);
@@ -158,16 +158,19 @@ function draw() {
       image2.visible = true;
       image3.visible = true;
 
-      if(mousePressedOver(image1)){
+      if(mousePressedOver(image1) || touches.length>0){
         blade = 1;
+        touches = [];
         startButton.show();
       } 
-      if (mousePressedOver(image2)){
+      if (mousePressedOver(image2) || touches.length>0){
         blade = 2;
+        touches = [];
         startButton.show();
       } 
-      if(mousePressedOver(image3)){
+      if(mousePressedOver(image3) || touches.length>0){
         blade = 3;
+        touches = [];
         startButton.show();
       }
 
@@ -181,11 +184,11 @@ function draw() {
       ninja.scale = 0.05;
       ninja.addImage(ninjaImg);
       touches=[];
-    }else if(mousePressedOver(image2) || touches.length>0){
+    }if(mousePressedOver(image2) || touches.length>0){
       ninja.scale = 0.15;
       ninja.addImage(star3);
       touches=[];
-    }else if(mousePressedOver(image3) || touches.length>0){
+    }if(mousePressedOver(image3) || touches.length>0){
       ninja.scale = 0.08;
       ninja.addImage(star4);
       touches=[];
@@ -230,7 +233,7 @@ function draw() {
           time = 10;
           gameState = "powerPlay";
         }
-        if(score >0 && score % 500 === 0){
+        if(score >0 && score % 300 === 0){
           time = 5
           gameState = "autoMode";
         }
